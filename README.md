@@ -1,4 +1,4 @@
-# pyrobotiq
+# pyRobotiq for Universal Robots
 
 `pyrobotiq` is a small Python library that provides a simple socket-based interface
 to Robotiq grippers connected to a Universal Robots (UR) controller via the
