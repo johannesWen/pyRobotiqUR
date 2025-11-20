@@ -1,6 +1,6 @@
 [project]
 name = "pyRobotiqUR"
-version = "0.1.0"
+version = "0.2.0"
 description = "Simple Python interface for Robotiq grippers over a TCP socket (URCap/UR controller)."
 authors = [
     {name = "Johannes Wenninger",email = "johannes.wenninger@lcm.at"}
