@@ -1,6 +1,6 @@
 # pyRobotiqUR for Universal Robots
 [![CI](https://github.com/johannesWen/repo2file/actions/workflows/ci.yml/badge.svg)](https://github.com/johannesWen/repo2file/actions/workflows/ci.yml)
-![Coverage](./coverage.svg)
+[![codecov](https://codecov.io/github/johannesWen/pyRobotiqUR/graph/badge.svg?token=QYY9QI0YHS)](https://codecov.io/github/johannesWen/pyRobotiqUR)
 
 `pyRobotiqUR` is a small Python library that provides a simple socket-based interface
 to Robotiq grippers connected to a Universal Robots (UR) controller via the
