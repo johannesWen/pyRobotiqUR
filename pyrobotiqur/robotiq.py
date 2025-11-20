@@ -2,7 +2,7 @@ import socket
 import threading
 import time
 from typing import Optional
-from pyRobotiqUR.enums import GripperStatus, ObjectStatus
+from pyrobotiqur.enums import GripperStatus, ObjectStatus
 
 
 class RobotiqGripper:

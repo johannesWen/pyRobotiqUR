@@ -1,8 +1,8 @@
 import socket
 import pytest
 
-from pyRobotiqUR import RobotiqGripper
-from pyRobotiqUR.enums import ObjectStatus, GripperStatus
+from pyrobotiqur import RobotiqGripper
+from pyrobotiqur.enums import ObjectStatus, GripperStatus
 
 
 # ---------------------------------------------------------------------------
