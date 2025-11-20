@@ -1,0 +1,40 @@
+[project]
+name = "pyRobotiqUR"
+version = "0.1.0"
+description = "Simple Python interface for Robotiq grippers over a TCP socket (URCap/UR controller)."
+authors = [
+    {name = "Johannes Wenninger",email = "johannes.wenninger@lcm.at"}
+]
+license = "MIT"
+readme = "README.md"
+keywords = ["robotiq", "robotics", "gripper", "ur", "urcap"]
+requires-python = ">=3.11"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.1"
+pytest-cov = "^7.0.0"
+
+[tool.coverage.run]
+omit = ["*/tests/*", 
+        "setup.py", 
+        "docs/*", 
+        "*/examples/*", 
+        "*/__init__.py",
+        "setup_logging.py",
+        "main*.py",
+        "config.py",
+        "config-3.py",]
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true
+fail_under = 80
+exclude_lines=["if __name__ == .__main__."]
+

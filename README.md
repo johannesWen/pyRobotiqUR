@@ -1,6 +1,6 @@
-# pyRobotiq for Universal Robots
+# pyRobotiqUR for Universal Robots
 
-`pyrobotiq` is a small Python library that provides a simple socket-based interface
+`pyRobotiqUR` is a small Python library that provides a simple socket-based interface
 to Robotiq grippers connected to a Universal Robots (UR) controller via the
 Robotiq URCap.
 
@@ -20,5 +20,5 @@ on the URCap’s internal server port (typically `63352`).
 Once published, you’ll be able to install via:
 
 ```bash
-pip install pyrobotiq
+pip install .
 ```
