@@ -49,8 +49,10 @@ jobs:
       - name: Run tests with coverage
         run: poetry run pytest --cov
       - name: Codecov
-        uses: codecov/codecov-action@v1.3.2
-        
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
       # - name: List files after tests
       #   run: |
       #     pwd
