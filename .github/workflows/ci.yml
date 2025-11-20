@@ -48,6 +48,12 @@ jobs:
       - name: Run tests with coverage
         run: poetry run pytest --cov
 
+  coverage-badge:
+    name: Generate Coverage Badge
+    runs-on: ubuntu-latest
+    needs: tests
+
+    steps:
       - name: Generate coverage badge
         uses: tj-actions/coverage-badge-py@v2
 
