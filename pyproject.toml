@@ -23,12 +23,12 @@ pytest-cov = "^7.0.0"
 
 [tool.pytest.ini_options]
 # Additional options passed to pytest
-addopts = "--cov=pyRobotiqUR --cov-report=term-missing --cov-report=html"
+addopts = "--cov --cov-report=term-missing --cov-report=html"
 testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["pyRobotiqUR"]
+# source = ["pyRobotiqUR"]
 
 [tool.coverage.report]
 show_missing = true
