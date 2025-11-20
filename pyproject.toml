@@ -28,7 +28,17 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-# source = ["pyRobotiqUR"]
+source = ["pyRobotiqUR"]
+omit = ["*/tests/*", 
+        "setup.py", 
+        "docs/*", 
+        "*/examples/*", 
+        "*/__init__.py",
+        "setup_logging.py",
+        "main*.py",
+        "config.py",
+        "config-3.py",]
+
 
 [tool.coverage.report]
 show_missing = true
