@@ -21,21 +21,16 @@ build-backend = "poetry.core.masonry.api"
 pytest = "^9.0.1"
 pytest-cov = "^7.0.0"
 
+[tool.pytest.ini_options]
+# Additional options passed to pytest
+addopts = "--cov=pyRobotiqUR --cov-report=term-missing --cov-report=html"
+testpaths = ["tests"]
+
 [tool.coverage.run]
-omit = ["*/tests/*", 
-        "setup.py", 
-        "docs/*", 
-        "*/examples/*", 
-        "*/__init__.py",
-        "setup_logging.py",
-        "main*.py",
-        "config.py",
-        "config-3.py",]
-data_file = ".coverage"
+branch = true
+source = ["pyRobotiqUR"]
 
 [tool.coverage.report]
 show_missing = true
-skip_empty = true
 fail_under = 80
-exclude_lines=["if __name__ == .__main__."]
 
