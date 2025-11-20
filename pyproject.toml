@@ -28,7 +28,7 @@ testpaths = ["tests"]
 
 [tool.coverage.run]
 branch = true
-source = ["pyRobotiqUR"]
+source = ["pyrobotiqur"]
 omit = ["*/tests/*", 
         "setup.py", 
         "docs/*", 
