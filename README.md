@@ -1,11 +1,14 @@
+# <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="50"/>  pyRobotiqUR for Universal Robots
+
 <p align="left">
-    <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="150"/>
+    <!-- <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="50"/> -->
+    <a href="https://github.com/johannesWen/repo2file/actions/workflows/ci.yml">
+        <img src="https://github.com/johannesWen/repo2file/actions/workflows/ci.yml/badge.svg" alt="CI"/>
+    </a>
+    <a href="https://codecov.io/github/johannesWen/pyRobotiqUR">
+        <img src="https://codecov.io/github/johannesWen/pyRobotiqUR/graph/badge.svg?token=QYY9QI0YHS" alt="codecov"/>
+    </a>
 </p>
-
-[![CI](https://github.com/johannesWen/repo2file/actions/workflows/ci.yml/badge.svg)](https://github.com/johannesWen/repo2file/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/github/johannesWen/pyRobotiqUR/graph/badge.svg?token=QYY9QI0YHS)](https://codecov.io/github/johannesWen/pyRobotiqUR)
-
-# pyRobotiqUR for Universal Robots
 
 `pyRobotiqUR` is a small Python library that provides a simple socket-based interface
 to Robotiq grippers connected to a Universal Robots (UR) controller via the
@@ -16,13 +19,14 @@ on the URCap’s internal server port (typically `63352`).
 
 ## Features
 
-- Connect to a UR controller over TCP
+- Connect to a UR controller over TCP/IP
 - Activate / reset the Robotiq gripper
 - Move to a raw position `0–255`
 - Move using a convenient `0–100 %` interface (`0%` open, `100%` closed)
 - Read status, object status and fault codes
 
 ## Installation
+
 Install the URCap on your Universal Robots controller first:
 - Download the Robotiq URCap from the [Robotiq website](https://robotiq.com/support)
 - Install and activate the URCap on your UR controller
