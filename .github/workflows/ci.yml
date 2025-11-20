@@ -46,8 +46,11 @@ jobs:
           poetry install --no-interaction --no-ansi
 
       - name: Run tests with coverage
-        run: poetry run pytest --cov
-
+        run: poetry run pytest --cov=pyRobotiqUR
+      - name: List files after tests
+        run: |
+          pwd
+          ls -R
       - name: Upload coverage data
         if: matrix.python-version == '3.11'
         uses: actions/upload-artifact@v4
