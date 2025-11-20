@@ -1,5 +1,5 @@
 import time
-from pyRobotiqUR import RobotiqGripper
+from pyrobotiqur import RobotiqGripper
 
 
 UR_IP = "192.168.0.10"   # <-- replace with your UR controller IP
