@@ -46,6 +46,8 @@ jobs:
           poetry install --no-interaction --no-ansi
 
       - name: Run tests with coverage
+        env:
+          COVERAGE_FILE: coverage/.coverage
         run: poetry run pytest --cov
       - name: List files after tests
         run: |
