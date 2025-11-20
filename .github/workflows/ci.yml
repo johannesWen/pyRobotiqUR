@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-data
-          path: .coverage
+          path: coverage/.coverage
 
   coverage-badge:
     name: Generate Coverage Badge
@@ -71,10 +71,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-data
-          path: .  # put .coverage in the repo root
+          path: coverage
 
       - name: Generate coverage badge
         uses: tj-actions/coverage-badge-py@v2
+        with:
+          working-directory: coverage  # important: run where .coverage lives
 
       - name: Verify if coverage badge has changed
         id: verify-changed-files

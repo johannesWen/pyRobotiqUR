@@ -38,7 +38,7 @@ omit = ["*/tests/*",
         "main*.py",
         "config.py",
         "config-3.py",]
-
+data_file = "coverage/.coverage"
 
 [tool.coverage.report]
 show_missing = true
