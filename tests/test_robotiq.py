@@ -386,7 +386,6 @@ def test_activate_skips_reset_if_already_active(monkeypatch):
     values = [c[0][1] for c in set_recorder.calls]
     assert ("ACT" in names) and (1 in values)
 
-
 def test_activate_triggers_reset_when_inactive_and_honors_wait_false(monkeypatch):
     g = RobotiqGripper("127.0.0.1")
 
@@ -412,6 +411,7 @@ def test_activate_triggers_reset_when_inactive_and_honors_wait_false(monkeypatch
 # ---------------------------------------------------------------------------
 # connect / disconnect
 # ---------------------------------------------------------------------------
+
 
 def test_connect_creates_socket_and_connects(monkeypatch):
     created = {}
@@ -593,3 +593,35 @@ def test_send_raw_sends_trimmed_command_and_returns_stripped_response():
     assert s.sent_data == b"GET POS\n"
     # Response should be decoded and stripped
     assert resp == "POS 123"
+
+
+def test_send_raw_raises_if_remote_closed():
+    g = RobotiqGripper("10.0.0.1")
+
+    class DummySocket:
+        def __init__(self):
+            self.sent_data = None
+
+        def sendall(self, data):
+            self.sent_data = data
+
+        def recv(self, bufsize):
+            return b""  # simulate remote disconnect
+
+    s = DummySocket()
+    g._sock = s
+
+    with pytest.raises(ConnectionError):
+        g._send_raw("GET POS")
+
+
+def test_is_connected_property_reflects_socket_state():
+    g = RobotiqGripper("10.0.0.1")
+    assert g.is_connected is False
+
+    class DummySocket:
+        pass
+
+    g._sock = DummySocket()
+    assert g.is_connected is True
+
