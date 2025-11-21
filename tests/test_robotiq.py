@@ -386,6 +386,27 @@ def test_activate_skips_reset_if_already_active(monkeypatch):
     values = [c[0][1] for c in set_recorder.calls]
     assert ("ACT" in names) and (1 in values)
 
+def test_activate_triggers_reset_when_inactive_and_honors_wait_false(monkeypatch):
+    g = RobotiqGripper("127.0.0.1")
+
+    reset_calls = CallRecorder()
+    monkeypatch.setattr(g, "reset", reset_calls)
+
+    # First report inactive so reset() is expected
+    statuses = [GripperStatus.RESET, GripperStatus.ACTIVE]
+
+    def fake_get_status():
+        return statuses.pop(0)
+
+    monkeypatch.setattr(g, "get_status", fake_get_status)
+
+    set_rec = CallRecorder()
+    monkeypatch.setattr(g, "set_var", set_rec)
+
+    g.activate(wait=False, poll_interval=0.0)
+
+    assert len(reset_calls.calls) == 1
+    assert ("ACT", 1) in [c[0] for c in set_rec.calls]
 
 # ---------------------------------------------------------------------------
 # connect / disconnect
