@@ -221,6 +221,33 @@ def test_move_nowait_returns_immediately(monkeypatch):
     assert obj_status == ObjectStatus.MOVING
 
 
+def test_move_clamps_position_speed_and_force(monkeypatch):
+    g = RobotiqGripper("127.0.0.1")
+
+    set_calls = []
+
+    def fake_set_var(name, value):
+        set_calls.append((name, value))
+
+    monkeypatch.setattr(g, "set_var", fake_set_var)
+    requested_positions = [-1, 0]
+
+    def fake_get_requested_position():
+        return requested_positions.pop(0)
+
+    monkeypatch.setattr(g, "get_requested_position", fake_get_requested_position)
+    monkeypatch.setattr(g, "get_object_status", lambda: ObjectStatus.AT_DEST)
+    monkeypatch.setattr(g, "get_position", lambda: 0)
+    monkeypatch.setattr("time.sleep", lambda *_args, **_kwargs: None)
+
+    g.move(-50, speed=999, force=-10, wait=True, poll_interval=0.0)
+
+    # Values should be clamped to [0, 255]
+    assert ("POS", 0) in set_calls
+    assert ("SPE", 255) in set_calls
+    assert ("FOR", 0) in set_calls
+
+
 # ---------------------------------------------------------------------------
 # open() / close() tests
 # ---------------------------------------------------------------------------
@@ -308,6 +335,26 @@ def test_reset_calls_act_and_atr_until_reset(monkeypatch):
     assert "ATR" in names
 
 
+def test_reset_raises_after_timeout(monkeypatch):
+    g = RobotiqGripper("127.0.0.1")
+
+    # Always report non-reset state so loop never finishes
+    monkeypatch.setattr(
+        g,
+        "get_var",
+        lambda name: 1 if name == "ACT" else GripperStatus.ACTIVE,
+    )
+
+    # Prevent real socket usage
+    monkeypatch.setattr(g, "set_var", lambda *_, **__: None)
+
+    # Avoid sleeping to keep test fast
+    monkeypatch.setattr("time.sleep", lambda *_args, **_kwargs: None)
+
+    with pytest.raises(TimeoutError):
+        g.reset(poll_interval=0.0, timeout=0.0)
+
+
 def test_activate_skips_reset_if_already_active(monkeypatch):
     g = RobotiqGripper("127.0.0.1")
 
@@ -338,6 +385,29 @@ def test_activate_skips_reset_if_already_active(monkeypatch):
     names = [c[0][0] for c in set_recorder.calls]
     values = [c[0][1] for c in set_recorder.calls]
     assert ("ACT" in names) and (1 in values)
+
+
+def test_activate_triggers_reset_when_inactive_and_honors_wait_false(monkeypatch):
+    g = RobotiqGripper("127.0.0.1")
+
+    reset_calls = CallRecorder()
+    monkeypatch.setattr(g, "reset", reset_calls)
+
+    # First report inactive so reset() is expected
+    statuses = [GripperStatus.RESET, GripperStatus.ACTIVE]
+
+    def fake_get_status():
+        return statuses.pop(0)
+
+    monkeypatch.setattr(g, "get_status", fake_get_status)
+
+    set_rec = CallRecorder()
+    monkeypatch.setattr(g, "set_var", set_rec)
+
+    g.activate(wait=False, poll_interval=0.0)
+
+    assert len(reset_calls.calls) == 1
+    assert ("ACT", 1) in [c[0] for c in set_rec.calls]
 
 # ---------------------------------------------------------------------------
 # connect / disconnect
@@ -413,6 +483,12 @@ def test_disconnect_closes_socket_and_clears_attr():
     assert g._sock is None
 
 
+def test_disconnect_noop_when_not_connected():
+    g = RobotiqGripper("10.0.0.1")
+    # Should simply return without error
+    g.disconnect()
+
+
 def test_disconnect_clears_attr_even_if_close_raises():
     class DummySocket:
         def __init__(self):
@@ -451,6 +527,20 @@ def test_context_manager_calls_connect_and_disconnect(monkeypatch):
         assert ctx is g
 
     assert len(connect_rec.calls) == 1
+    assert len(disconnect_rec.calls) == 1
+
+
+def test_context_manager_disconnects_even_on_exception(monkeypatch):
+    g = RobotiqGripper("10.0.0.1")
+
+    monkeypatch.setattr(g, "connect", lambda: None)
+    disconnect_rec = CallRecorder()
+    monkeypatch.setattr(g, "disconnect", disconnect_rec)
+
+    with pytest.raises(RuntimeError):
+        with g:
+            raise RuntimeError("bang")
+
     assert len(disconnect_rec.calls) == 1
 
 
