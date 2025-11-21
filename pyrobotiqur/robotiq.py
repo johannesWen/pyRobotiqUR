@@ -52,6 +52,11 @@ class RobotiqGripper:
     def __exit__(self, exc_type, exc, tb):
         self.disconnect()
 
+    @property
+    def is_connected(self) -> bool:
+        """Whether the TCP socket is currently open."""
+        return self._sock is not None
+
     def _send_raw(self, cmd):
         """
         Send a raw command string and return the raw response as a decoded string.
@@ -63,6 +68,8 @@ class RobotiqGripper:
         with self._lock:
             self._sock.sendall(data)
             resp = self._sock.recv(1024)
+        if not resp:
+            raise ConnectionError("Socket connection closed by the remote host")
         return resp.decode("ascii").strip()
 
     # --- variables API (GET / SET) -----------------------------------------------
