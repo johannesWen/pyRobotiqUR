@@ -47,10 +47,15 @@ jobs:
       - name: Create coverage directory
         run: mkdir -p coverage
       - name: Run tests with coverage
-        run: poetry run pytest --cov
+        run: poetry run pytest --cov --junitxml=junit.xml -o junit_family=legacy
       - name: Codecov
         if: matrix.python-version == '3.14'
         uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
