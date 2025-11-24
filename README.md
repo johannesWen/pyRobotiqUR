@@ -1,4 +1,4 @@
-# <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="50"/>  pyRobotiqUR for Universal Robots
+# <img src="https://github.com/johannesWen/pyRobotiqUR/blob/main/assets/pyrobotiqur_icon.png?raw=true" alt="pyRobotiqUR" width="50"/>  pyRobotiqUR for Universal Robots
 
 <p align="left">
     <!-- <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="50"/> -->
