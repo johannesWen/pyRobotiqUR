@@ -1,18 +1,21 @@
 [project]
 name = "pyRobotiqUR"
-version = "0.2.1"
+version = "0.2.2"
 description = "Simple Python interface for Robotiq grippers over a TCP socket (URCap/UR controller)."
 authors = [
-    {name = "Johannes Wenninger",email = "johannes.wenninger@lcm.at"}
+    {name = "Johannes Wenninger"}
 ]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/johannesWen/pyRobotiqUR"
 keywords = ["robotiq", "robotics", "gripper", "ur", "urcap"]
 requires-python = ">=3.10 ,<=3.14"
 dependencies = [
 ]
 
+[project.urls]
+Repository = "https://github.com/johannesWen/pyRobotiqUR"
+Issues = "https://github.com/johannesWen/pyRobotiqUR/issues"
+Changelog = "https://github.com/johannesWen/pyRobotiqUR/blob/master/CHANGELOG.md"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
