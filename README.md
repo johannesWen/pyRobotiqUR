@@ -1,4 +1,6 @@
-# <img src="https://github.com/johannesWen/pyRobotiqUR/blob/main/assets/pyrobotiqur_icon.png?raw=true" alt="pyRobotiqUR" width="50"/>  pyRobotiqUR for Universal Robots
+<p align="center">
+    <img src="https://github.com/johannesWen/pyRobotiqUR/blob/main/assets/pyrobotiqur_icon.png" height="150" alt="pyRobotiqUR logo">
+</p>
 
 <p align="left">
     <!-- <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="50"/> -->
@@ -9,6 +11,10 @@
         <img src="https://codecov.io/github/johannesWen/pyRobotiqUR/graph/badge.svg?token=QYY9QI0YHS" alt="codecov"/>
     </a>
 </p>
+
+---
+
+# pyRobotiqUR for Universal Robots
 
 `pyRobotiqUR` is a small Python library that provides a simple socket-based interface
 to Robotiq grippers connected to a Universal Robots (UR) controller via the
