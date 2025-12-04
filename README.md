@@ -2,15 +2,9 @@
     <img src="https://github.com/johannesWen/pyRobotiqUR/blob/main/assets/pyrobotiqur_icon.png" height="150" alt="pyRobotiqUR logo">
 </p>
 
-<p align="left">
-    <!-- <img src="./assets/pyrobotiqur_icon.png" alt="pyRobotiqUR icon" width="50"/> -->
-    <a href="https://github.com/johannesWen/repo2file/actions/workflows/ci.yml">
-        <img src="https://github.com/johannesWen/repo2file/actions/workflows/ci.yml/badge.svg" alt="CI"/>
-    </a>
-    <a href="https://codecov.io/github/johannesWen/pyRobotiqUR">
-        <img src="https://codecov.io/github/johannesWen/pyRobotiqUR/graph/badge.svg?token=QYY9QI0YHS" alt="codecov"/>
-    </a>
-</p>
+[![CI](https://github.com/johannesWen/repo2file/actions/workflows/ci.yml/badge.svg)](https://github.com/johannesWen/repo2file/actions/workflows/ci.yml)
+[![coverage](https://codecov.io/github/johannesWen/pyRobotiqUR/graph/badge.svg?token=QYY9QI0YHS)](https://codecov.io/github/johannesWen/pyRobotiqUR)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pyRobotiqUR)](https://pypi.org/project/pyRobotiqUR/)
 
 ---
 
